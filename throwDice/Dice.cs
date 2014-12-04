@@ -7,24 +7,19 @@ using System.Threading.Tasks;
 
 namespace throwDice
 {
-    class Dice
+    public class Dice
     {
-        private GraphClient client;
-        
-       
+        public GraphClient client;
+        Random random = new Random();
         public int num { get; set; }
+        public int randomID { get; set; }
 
         public void initClientConnection()
         {
             try
             {
-                if (this.client != null)
-                {
-                    return;
-                }
-
-                this.client = new GraphClient(new Uri("http://localhost:7474/db/data"));
-                this.client.Connect();
+                client = new GraphClient(new Uri("http://localhost:7474/db/data"));
+                client.Connect();
             }
             catch (Exception ex)
             {
@@ -34,14 +29,14 @@ namespace throwDice
 
         public void createDice()
         {
-            Console.Write(this.num);
-
-            this.client.Cypher
-                .Create("(dice:Dice {num:" + this.num + "})")
-                .WithParam("Num", this.num)
+            initClientConnection();
+            num = random.Next(1, 7);
+            randomID = random.Next(1, 700);
+            client.Cypher
+                .Create("(dice:Dice {num:" + num + ", randomID:" + randomID + "})")
+                .WithParam("Num", num)
                 .ExecuteWithoutResults();
         }
-
 
     }
 }
