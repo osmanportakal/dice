@@ -15,7 +15,7 @@ namespace DiceTest
         [TestMethod]
         public void TestDiceNumbers()
         {
-            if (dice.num < 0 && dice.num > 7)
+            if (dice.num < 0 && dice.num > 8)
             {
                 Assert.Fail("Dicenumber incorrect");
             }
