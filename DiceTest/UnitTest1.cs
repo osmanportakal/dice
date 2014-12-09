@@ -15,11 +15,10 @@ namespace DiceTest
         [TestMethod]
         public void TestDiceNumbers()
         {
-            if (dice.num < 0 && dice.num > 8)
+            if (dice.num < 1 && dice.num > 7)
             {
                 Assert.Fail("Dicenumber incorrect");
             }
-
             if (dice.randomID < 0 && dice.randomID > 700)
             {
                 Assert.Fail("Dice ID incorrect");
